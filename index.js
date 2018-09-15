@@ -61,6 +61,12 @@ io.sockets.on('connection', (socket) => {
         delete PLAYER_LIST[socket.id]
 
     })
+
+    socket.on('attack', (userCode) =>{
+        if(userCode === "test"){
+            player.health.current -= 10;
+        }
+    })
 })
 
 setInterval(() => {
@@ -81,3 +87,4 @@ setInterval(() => {
         socket.emit('startingPos', pack)
     }
 }, 1000 / 25)
+

@@ -16,13 +16,44 @@
                 console.log(data[i].x, data[i].y)
                 ctx.drawImage(image, data[i].x, data[i].y,200,200);
                 ctx.fillText("Pythachu",data[i].x + 50, 360);
-                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 400);
+                drawHealthbar(ctx,data[i].x,0,350,50,data[i].health.current,data[i].health.total);
+                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
             }
             else{
                 ctx.fillText("Flarebase", data[i].x + 50, 360);
+                drawHealthbar(ctx,data[i].x,0,350,50,data[i].health.current,data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 400);
                 ctx.drawImage(image2, data[i].x, data[i].y,300,300);               
             }
         }
     })
+    function submitCode(){
+        var userCode = document.getElementById("userInput").value;
+        setInterval(function(){
+            socket.emit('attack', userCode);
+        })
+    }
+
+    
+    
+
+    function drawHealthbar(canvas,x,y,width,height,health,max_health){
+	    if(health>=max_health){health=max_health;}
+	    if(health<=0){health = 0;}
+	    canvas.fillStyle = '#0000000';
+	    canvas.fillRect(x,y,width,height);
+	    var colorNumber = Math.round((1-(health/max_health))*0xff)*0x10000+Math.round((health/max_health)*0xff)*0x100;
+	    var colorString = colorNumber.toString(16);
+	    if(colorNumber>= 0x100000){
+	        canvas.fillStyle = '#'+colorString;
+	    }else if (colorNumber << 0x100000 && colorNumber >= 0x100000){
+		    canvas.fillStyle = '#0'+colorString;
+	    }else if (colorNumber << 0x10000) {
+		    canvas.fillStyle = '#00'+colorString;
+		}
+	    canvas.fillRect(x+1,y+1,(health/max_health)*(width-2),height-2);
+    }
 </script>
+<input type="text" id="instructions"  readOnly="true">
+<textarea id="userInput"> </textarea>
+<button type="button" onclick="submitCode()">Submit</button>
