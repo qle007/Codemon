@@ -1,0 +1,15 @@
+<canvas id="ctx" width="1200" height="700" style="border:1px solid #000000;"></canvas>
+<img id="image" src="https://t4.rbxcdn.com/62bbee6270c1fd87433471fce981285b" hidden = "true">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+<script>
+    var ctx = document.getElementById("ctx").getContext("2d");
+    var img=document.getElementById("image");
+    ctx.font = '30px Arial'
+    var socket  = io()
+    socket.on("newPositions", (data)=>{
+        ctx.clearRect(0,0,1200,700)
+        for(var i = 0; i < data.length;i++)
+        ctx.drawImage(image, 0,50);
+
+    })
+</script>
