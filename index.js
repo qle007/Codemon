@@ -14,40 +14,63 @@ console.log("Server started!")
 var SOCKET_LIST = {}
 var PLAYER_LIST = {}
 
-var Player = (id)=>{
+var Player = (id) => {
     var self = {
-        health: 200,
-        id:id,
+        health: 500,
+        x: 0,
+        y: 100,
+        id: 0,
         number: "" + Math.floor(10 * Math.random())
     }
+    if(id == 1)
+    {
+        var self = {
+            health: 500,
+            x: 700,
+            y: 50,
+            id: 1,
+            number: "" + Math.floor(10 * Math.random())
+        }
+    }
+
     return self
 }
-
-var io = require('socket.io')(serv,{});
-io.sockets.on('connection', (socket)=>{
-    socket.id = Math.random();
+var i = 0;
+var io = require('socket.io')(serv, {});
+io.sockets.on('connection', (socket) => {
+    if (i <= 2) {
+        socket.id = i++
+    }
+    else {
+        i = 1
+    }
     SOCKET_LIST[socket.id] = socket;
+
 
     var player = Player(socket.id)
     PLAYER_LIST[socket.id] = player
 
-    socket.on('disconnect',()=>{
+    socket.on('disconnect', () => {
         delete SOCKET_LIST[socket.id]
         delete PLAYER_LIST[socket.id]
 
     })
 })
 
-setInterval(() =>{
+setInterval(() => {
     var pack = []
-    for(var i in PLAYER_LIST){
+    for (var i in PLAYER_LIST) {
         var player = PLAYER_LIST[i]
+        console.log(player.x, player.y, player.id)
         pack.push({
-            number:player.number
+            id: player.id,
+            x: player.x,
+            y: player.y,
+            number: player.number
         })
     }
-    for(var i in SOCKET_LIST){
+    for (var i in SOCKET_LIST) {
         var socket = SOCKET_LIST[i]
-        socket.emit('newPositions', pack)
+        socket.emit('startingPos', pack)
     }
-}, 1000/25)
+}, 1000 / 25)
