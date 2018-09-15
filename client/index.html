@@ -1,6 +1,6 @@
-<canvas id="ctx" width="1200" height="700" style="border:1px solid #000000;"></canvas>
-<img id="image" src="https://t4.rbxcdn.com/62bbee6270c1fd87433471fce981285b" hidden="true">
-<img id="image2" src="https://c-7npsfqifvt34x24hvjeftnfejbx2ejhox2edpn.g00.ign.com/g00/3_c-7x78x78x78.jho.dpn_/c-7NPSFQIFVT34x24iuuqx3ax2fx2fhvjeftnfejb.jho.dpnx2fhvjeftx2f160798x2fjnbhftx2fcmbdlx78ijufx2fqplfnbot_247.hjgx3fj21d.nbslx3djnbhf_$/$/$/$/$/$" hidden="true">
+<canvas id="ctx" width="800" height="400" style="border:1px solid #000000;"></canvas>
+<img id="image"  src="https://t4.rbxcdn.com/62bbee6270c1fd87433471fce981285b" hidden="true">
+<img id="image2"  src="https://c-7npsfqifvt34x24hvjeftnfejbx2ejhox2edpn.g00.ign.com/g00/3_c-7x78x78x78.jho.dpn_/c-7NPSFQIFVT34x24iuuqx3ax2fx2fhvjeftnfejb.jho.dpnx2fhvjeftx2f160798x2fjnbhftx2fcmbdlx78ijufx2fqplfnbot_247.hjgx3fj21d.nbslx3djnbhf_$/$/$/$/$/$" hidden="true">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 <script>
     var ctx = document.getElementById("ctx").getContext("2d");
@@ -14,10 +14,12 @@
         for (var i = 0; i < data.length > 0; i++) {
             if (data[i].id == 0) {
                 console.log(data[i].x, data[i].y)
-                ctx.drawImage(image, data[i].x, data[i].y);
+                ctx.drawImage(image, data[i].x, data[i].y,200,200);
+                ctx.fillText("Pythachu",data[i].x + 50, 360)
             }
             else{
-                ctx.drawImage(image2, data[i].x, data[i].y);               
+                ctx.fillText("Flarebase", data[i].x + 50, 360)
+                ctx.drawImage(image2, data[i].x, data[i].y,300,300);               
             }
         }
     })

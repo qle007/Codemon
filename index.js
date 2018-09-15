@@ -17,7 +17,7 @@ var PLAYER_LIST = {}
 var Player = (id) => {
     var self = {
         health: 500,
-        x: 0,
+        x: 50,
         y: 100,
         id: 0,
         number: "" + Math.floor(10 * Math.random())
@@ -26,8 +26,8 @@ var Player = (id) => {
     {
         var self = {
             health: 500,
-            x: 700,
-            y: 50,
+            x: 500,
+            y: 75,
             id: 1,
             number: "" + Math.floor(10 * Math.random())
         }
