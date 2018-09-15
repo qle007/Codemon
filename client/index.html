@@ -15,10 +15,12 @@
             if (data[i].id == 0) {
                 console.log(data[i].x, data[i].y)
                 ctx.drawImage(image, data[i].x, data[i].y,200,200);
-                ctx.fillText("Pythachu",data[i].x + 50, 360)
+                ctx.fillText("Pythachu",data[i].x + 50, 360);
+                ctx.fillText("" + data[i].health, data[i].x + 50, 400);
             }
             else{
-                ctx.fillText("Flarebase", data[i].x + 50, 360)
+                ctx.fillText("Flarebase", data[i].x + 50, 360);
+                ctx.fillText("" + data[i].health, data[i].x + 50, 400);
                 ctx.drawImage(image2, data[i].x, data[i].y,300,300);               
             }
         }

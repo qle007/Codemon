@@ -61,11 +61,12 @@ setInterval(() => {
     var pack = []
     for (var i in PLAYER_LIST) {
         var player = PLAYER_LIST[i]
-        console.log(player.x, player.y, player.id)
+        //console.log(player.x, player.y, player.id)
         pack.push({
             id: player.id,
             x: player.x,
             y: player.y,
+            health: player.health,
             number: player.number
         })
     }
