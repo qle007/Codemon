@@ -16,7 +16,10 @@ var PLAYER_LIST = {}
 
 var Player = (id) => {
     var self = {
-        health: 500,
+        health: {
+            current: 500,
+            total: 500
+        },
         x: 0,
         y: 100,
         id: 0,
@@ -25,7 +28,10 @@ var Player = (id) => {
     if(id == 1)
     {
         var self = {
-            health: 500,
+            health: {
+                current: 500,
+                total: 500
+            },
             x: 700,
             y: 50,
             id: 1,
@@ -61,11 +67,13 @@ setInterval(() => {
     var pack = []
     for (var i in PLAYER_LIST) {
         var player = PLAYER_LIST[i]
-        console.log(player.x, player.y, player.id)
+        //console.log(player.x, player.y, player.id)
         pack.push({
             id: player.id,
             x: player.x,
             y: player.y,
+            hp: player.health,
+            attacks: player.attacks,
             number: player.number
         })
     }

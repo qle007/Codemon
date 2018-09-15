@@ -15,9 +15,11 @@
             if (data[i].id == 0) {
                 console.log(data[i].x, data[i].y)
                 ctx.drawImage(image, data[i].x, data[i].y);
+                ctx.fillText("" + data[i].hp.current + "/" + data[i].hp.total, data[i].x, data[i]. y + 10);
             }
             else{
-                ctx.drawImage(image2, data[i].x, data[i].y);               
+                ctx.drawImage(image2, data[i].x, data[i].y);
+                ctx.fillText("" + data[i].hp.current + "/" + data[i].hp.total, data[i].x, data[i].y + 10);               
             }
         }
     })
