@@ -16,7 +16,10 @@ var PLAYER_LIST = {}
 
 var Player = (id) => {
     var self = {
-        health: 500,
+        health: {
+            current: 500,
+            total: 500
+        },
         x: 50,
         y: 100,
         id: 0,
@@ -25,7 +28,10 @@ var Player = (id) => {
     if(id == 1)
     {
         var self = {
-            health: 500,
+            health: {
+                current: 500,
+                total: 500
+            },
             x: 500,
             y: 75,
             id: 1,
