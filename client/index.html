@@ -1,6 +1,6 @@
 <canvas id="ctx" width="600" height="450" style="border:1px solid #000000;"></canvas>
 <img id="image"  src="https://i.imgur.com/gcawaYw.png" hidden="true">
-<img id="image2"  src="https://i.imgur.com/50MovN8.png" hidden="true">
+<img id="image2"  src="https://i.imgur.com/WhyD5Dz.png" hidden="true">
 <img id="bg" src="http://www.clker.com/cliparts/f/d/9/4/14446594531140274907dpblatle-1%20(1)-hi.png" hidden="true">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 <script>
@@ -11,6 +11,7 @@
     
     ctx.font = '20px Arial';
     var socket = io()
+    socket.emit('p1', {})
     socket.on("startingPos", (data) => {
 
         ctx.clearRect(0, 0, 600, 450)
@@ -35,7 +36,7 @@
     })
     function submitCode(){
         var userCode = document.getElementById("userInput").value;
-        setInterval(function(){
+        setTimeout(function(){
             socket.emit('attack', userCode);
         })
         document.getElementById("userInput").value = "";
