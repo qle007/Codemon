@@ -41,14 +41,14 @@
     })
 
     socket.on('loss', function(data){
-        document.getElementById('game state').innerHTML = "Player " + (data.id + 1) + " LOSS";
+        document.getElementById('game state').innerHTML = "YOU LOSS";
         document.getElementById('userInput').disabled = true;
     })
 
     function submitCode(){
         var input = document.getElementById("userInput").value;
         setTimeout(function(){
-            socket.emit('attack', {userCode: input, id: data[socket.id].id});
+            socket.emit('attack', {userCode: input});
         })
         document.getElementById("userInput").value = "";
     }
