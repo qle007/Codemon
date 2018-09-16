@@ -1,29 +1,35 @@
-<canvas id="ctx" width="800" height="400" style="border:1px solid #000000;"></canvas>
-<img id="image"  src="https://t4.rbxcdn.com/62bbee6270c1fd87433471fce981285b" hidden="true">
+<canvas id="ctx" width="600" height="450" style="border:1px solid #000000;"></canvas>
+<img id="image"  src="https://i.imgur.com/gcawaYw.png" hidden="true">
 <img id="image2"  src="https://c-7npsfqifvt34x24hvjeftnfejbx2ejhox2edpn.g00.ign.com/g00/3_c-7x78x78x78.jho.dpn_/c-7NPSFQIFVT34x24iuuqx3ax2fx2fhvjeftnfejb.jho.dpnx2fhvjeftx2f160798x2fjnbhftx2fcmbdlx78ijufx2fqplfnbot_247.hjgx3fj21d.nbslx3djnbhf_$/$/$/$/$/$" hidden="true">
+<img id="bg" src="http://www.clker.com/cliparts/f/d/9/4/14446594531140274907dpblatle-1%20(1)-hi.png" hidden="true">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 <script>
     var ctx = document.getElementById("ctx").getContext("2d");
     var img = document.getElementById("image");
     var img2 = document.getElementById("image2");
+    var bg = document.getElementById("bg");
+    
     ctx.font = '30px Arial'
     var socket = io()
     socket.on("startingPos", (data) => {
 
-        ctx.clearRect(0, 0, 1200, 700)
+        ctx.clearRect(0, 0, 600, 450)
+        ctx.drawImage(bg, 0, 0);
         for (var i = 0; i < data.length > 0; i++) {
             if (data[i].id == 0) {
                 console.log(data[i].x, data[i].y)
-                ctx.drawImage(image, data[i].x, data[i].y,200,200);
-                ctx.fillText("Pythachu",data[i].x + 50, 360);
-                drawHealthbar(ctx, 0, 0, 250, 50, data[i].health.current,data[i].health.total);
+                ctx.drawImage(image, data[i].x, data[i].y, 200, 200);
+                ctx.fillText("Pythachu", 355, 265);
+                drawHealthbar(ctx, 462, 273, 117, 10, data[i].health.current, data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
+                document.getElementById("player_one").hidden = false;
             }
             else{
-                ctx.fillText("Flarebase", data[i].x + 50, 360);
+                ctx.fillText("Flarebase", 5, 80);
                 drawHealthbar(ctx, data[i].x, 0, 250, 50, data[i].health.current, data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
-                ctx.drawImage(image2, data[i].x, data[i].y,300,300);               
+                ctx.drawImage(image2, data[i].x, data[i].y,300,300);
+                document.getElementById("player_two").hidden = false;               
             }
         }
     })
@@ -32,8 +38,9 @@
         setInterval(function(){
             socket.emit('attack', userCode);
         })
-        
+        document.getElementById("userInput").value = "";
     }
+
     function drawHealthbar(canvas,x,y,width,height,health,max_health){
 	    if(health>=max_health){health=max_health;}
 	    if(health<=0){health = 0;}
@@ -51,6 +58,7 @@
 	    canvas.fillRect(x+1,y+1,(health/max_health)*(width-2),height-2);
     }
 </script>
-<input type="text" id="instructions"  readOnly="true">
-<textarea id="userInput"> </textarea>
+<p id="player_one" hidden="true">Create a for loop that starts i at 0 and loops 3 times.</p>
+<p id="player_two"></p>
+<textarea id="userInput"></textarea>
 <button type="button" onclick="submitCode()">Submit</button>

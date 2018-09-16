@@ -21,7 +21,7 @@ var Player = (id) => {
             total: 500
         },
         x: 50,
-        y: 100,
+        y: 150,
         id: 0,
         number: "" + Math.floor(10 * Math.random())
     }
@@ -65,7 +65,7 @@ io.sockets.on('connection', (socket) => {
     socket.on('attack', (userCode) =>{
         while(player.health.current > 0){
             if(userCode === "test"){
-                player.health.current -= 10;
+                    player.health.current -= 10;
             }
         }
         
