@@ -32,8 +32,8 @@ var Player = (id) => {
                 current: 500,
                 total: 500
             },
-            x: 500,
-            y: 75,
+            x: 370,
+            y: 28,
             id: 1,
             number: "" + Math.floor(10 * Math.random())
         }

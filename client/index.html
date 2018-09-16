@@ -1,6 +1,6 @@
 <canvas id="ctx" width="600" height="450" style="border:1px solid #000000;"></canvas>
 <img id="image"  src="https://i.imgur.com/gcawaYw.png" hidden="true">
-<img id="image2"  src="https://c-7npsfqifvt34x24hvjeftnfejbx2ejhox2edpn.g00.ign.com/g00/3_c-7x78x78x78.jho.dpn_/c-7NPSFQIFVT34x24iuuqx3ax2fx2fhvjeftnfejb.jho.dpnx2fhvjeftx2f160798x2fjnbhftx2fcmbdlx78ijufx2fqplfnbot_247.hjgx3fj21d.nbslx3djnbhf_$/$/$/$/$/$" hidden="true">
+<img id="image2"  src="https://i.imgur.com/50MovN8.png" hidden="true">
 <img id="bg" src="http://www.clker.com/cliparts/f/d/9/4/14446594531140274907dpblatle-1%20(1)-hi.png" hidden="true">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 <script>
@@ -9,7 +9,7 @@
     var img2 = document.getElementById("image2");
     var bg = document.getElementById("bg");
     
-    ctx.font = '30px Arial'
+    ctx.font = '20px Arial';
     var socket = io()
     socket.on("startingPos", (data) => {
 
@@ -19,16 +19,16 @@
             if (data[i].id == 0) {
                 console.log(data[i].x, data[i].y)
                 ctx.drawImage(image, data[i].x, data[i].y, 200, 200);
-                ctx.fillText("Pythachu", 355, 265);
+                ctx.fillText("Pythachu", 355, 255);
                 drawHealthbar(ctx, 462, 273, 117, 10, data[i].health.current, data[i].health.total);
-                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
+                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 300, 287);
                 document.getElementById("player_one").hidden = false;
             }
             else{
                 ctx.fillText("Flarebase", 5, 80);
-                drawHealthbar(ctx, data[i].x, 0, 250, 50, data[i].health.current, data[i].health.total);
+                drawHealthbar(ctx, 114, 95, 117, 10, data[i].health.current, data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
-                ctx.drawImage(image2, data[i].x, data[i].y,300,300);
+                ctx.drawImage(image2, data[i].x, data[i].y, 200,200);
                 document.getElementById("player_two").hidden = false;               
             }
         }
