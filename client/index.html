@@ -30,9 +30,9 @@
     function submitCode(){
         var userCode = document.getElementById("userInput").value;
         setInterval(function(){
-            socket.emit('attack', userCode, data[i]);
+            socket.emit('attack', userCode);
         })
-        clearInterval();
+        
     }
     function drawHealthbar(canvas,x,y,width,height,health,max_health){
 	    if(health>=max_health){health=max_health;}
