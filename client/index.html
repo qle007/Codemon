@@ -10,7 +10,7 @@
     var bg = document.getElementById("bg");
     
     ctx.font = '20px Arial';
-    var socket = io()
+    var socket = io.connect();
     socket.emit('p1', {})
     socket.on("startingPos", (data) => {
 
@@ -23,14 +23,14 @@
                 ctx.fillText("Pythachu", 355, 255);
                 drawHealthbar(ctx, 462, 273, 117, 10, data[i].health.current, data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 300, 287);
-                document.getElementById("player_one").hidden = false;
+                
             }
             else{
                 ctx.fillText("Flarebase", 5, 80);
                 drawHealthbar(ctx, 114, 95, 117, 10, data[i].health.current, data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, 8, 108);
                 ctx.drawImage(image2, data[i].x, data[i].y, 200,200);
-                document.getElementById("player_two").hidden = false;               
+                             
             }
         }
     })
@@ -58,8 +58,13 @@
 		}
 	    canvas.fillRect(x+1,y+1,(health/max_health)*(width-2),height-2);
     }
+
+    socket.on('Instructions', function(atk){
+        document.getElementById('code to create').textContent = atk;
+    })
 </script>
-<p id="player_one" hidden="true">Create a for loop that starts i at 0 and loops 3 times.</p>
-<p id="player_two"></p>
-<textarea id="userInput"></textarea>
+<p></p>
+<p id="code to create"></p>
+
+<textarea id="userInput" cols="72"></textarea>
 <button type="button" onclick="submitCode()">Submit</button>

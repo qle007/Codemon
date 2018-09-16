@@ -67,7 +67,15 @@ io.sockets.on('connection', (socket) => {
                     player.health.current -= 10;
             }
     })
+
+    //socket.emit('Instructions', 'Create a for loop that starts i at 0 and loops 3 times.');
 })
+
+setTimeout(function(){
+    //io.sockets.(PLAYER_LIST[1]).emit('Instructions', 'Create a for loop that starts i at 0 and loops 3 times.');
+    //io.sockets.socket(PLAYER_LIST[2]).emit('Instructions', 'You are player 2.');
+}, 2000);
+
 
 setInterval(() => {
     var pack = []
