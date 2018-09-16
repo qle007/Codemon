@@ -16,13 +16,13 @@
                 console.log(data[i].x, data[i].y)
                 ctx.drawImage(image, data[i].x, data[i].y,200,200);
                 ctx.fillText("Pythachu",data[i].x + 50, 360);
-                drawHealthbar(ctx,data[i].x,0,350,50,data[i].health.current,data[i].health.total);
+                drawHealthbar(ctx,0,0,350,50,data[i].health.current,data[i].health.total);
                 ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
             }
             else{
                 ctx.fillText("Flarebase", data[i].x + 50, 360);
                 drawHealthbar(ctx,data[i].x,0,350,50,data[i].health.current,data[i].health.total);
-                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 400);
+                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
                 ctx.drawImage(image2, data[i].x, data[i].y,300,300);               
             }
         }
@@ -33,10 +33,6 @@
             socket.emit('attack', userCode);
         })
     }
-
-    
-    
-
     function drawHealthbar(canvas,x,y,width,height,health,max_health){
 	    if(health>=max_health){health=max_health;}
 	    if(health<=0){health = 0;}

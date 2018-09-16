@@ -63,9 +63,12 @@ io.sockets.on('connection', (socket) => {
     })
 
     socket.on('attack', (userCode) =>{
-        if(userCode === "test"){
-            player.health.current -= 10;
+        while(player.health.current > 0){
+            if(userCode === "test"){
+                player.health.current -= 10;
+            }
         }
+        
     })
 })
 
