@@ -28,7 +28,7 @@
             else{
                 ctx.fillText("Flarebase", 5, 80);
                 drawHealthbar(ctx, 114, 95, 117, 10, data[i].health.current, data[i].health.total);
-                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, data[i].x + 50, 100);
+                ctx.fillText("" + data[i].health.current + "/" + data[i].health.total, 8, 108);
                 ctx.drawImage(image2, data[i].x, data[i].y, 200,200);
                 document.getElementById("player_two").hidden = false;               
             }
