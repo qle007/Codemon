@@ -10,13 +10,18 @@
     var bg = document.getElementById("bg");
     
     ctx.font = '20px Arial';
-    var socket = io.connect();
-    socket.emit('p1', {})
+    var socket = io();
+    
     socket.on("startingPos", (data) => {
+
+        
 
         ctx.clearRect(0, 0, 600, 450)
         ctx.drawImage(bg, 0, 0);
         for (var i = 0; i < data.length > 0; i++) {
+
+            socket.emit('joinRoom', {id:data[i].id});
+            
             if (data[i].id == 0) {
                 console.log(data[i].x, data[i].y)
                 ctx.drawImage(image, data[i].x, data[i].y, 200, 200);
@@ -34,10 +39,16 @@
             }
         }
     })
+
+    socket.on('loss', function(data){
+        document.getElementById('game state').innerHTML = "Player " + (data.id + 1) + " LOSS";
+        document.getElementById('userInput').disabled = true;
+    })
+
     function submitCode(){
-        var userCode = document.getElementById("userInput").value;
+        var input = document.getElementById("userInput").value;
         setTimeout(function(){
-            socket.emit('attack', userCode);
+            socket.emit('attack', {userCode: input, id: data[socket.id].id});
         })
         document.getElementById("userInput").value = "";
     }
@@ -60,11 +71,11 @@
     }
 
     socket.on('Instructions', function(atk){
-        document.getElementById('code to create').textContent = atk;
+        document.getElementById('code to create').innerHTML = atk.atk;
     })
 </script>
-<p></p>
-<p id="code to create"></p>
+<p id= 'game state'>Test</p>
+<p id='code to create'></p>
 
 <textarea id="userInput" cols="72"></textarea>
 <button type="button" onclick="submitCode()">Submit</button>

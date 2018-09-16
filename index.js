@@ -17,8 +17,8 @@ var PLAYER_LIST = {}
 var Player = (id) => {
     var self = {
         health: {
-            current: 500,
-            total: 500
+            current: 100,
+            total: 100
         },
         x: 50,
         y: 150,
@@ -29,8 +29,8 @@ var Player = (id) => {
     {
         var self = {
             health: {
-                current: 500,
-                total: 500
+                current: 100,
+                total: 100
             },
             x: 370,
             y: 28,
@@ -44,11 +44,12 @@ var Player = (id) => {
 var i = 0;
 var io = require('socket.io')(serv, {});
 io.sockets.on('connection', (socket) => {
-    if (i <= 2) {
+    if (i < 2) {
         socket.id = i++
+        console.log(socket.id)
     }
     else {
-        i = 1
+        i = 0
     }
     SOCKET_LIST[socket.id] = socket;
 
@@ -62,20 +63,25 @@ io.sockets.on('connection', (socket) => {
 
     })
 
-    socket.on('attack', (userCode) =>{
-            if(userCode === "test"){
-                    player.health.current -= 10;
+    socket.on('attack', (data) =>{
+        if(data.userCode === "test"){
+            player.health.current -= 50;
+            if(player.health.current == 0){
+                socket.emit('loss', {id: data.id});
             }
+        }
     })
 
-    //socket.emit('Instructions', 'Create a for loop that starts i at 0 and loops 3 times.');
+    socket.on('joinRoom', function(data){
+        socket.join(data.id);
+    })
+
+    
 })
 
 setTimeout(function(){
-    //io.sockets.(PLAYER_LIST[1]).emit('Instructions', 'Create a for loop that starts i at 0 and loops 3 times.');
-    //io.sockets.socket(PLAYER_LIST[2]).emit('Instructions', 'You are player 2.');
-}, 2000);
-
+    io.sockets.in('0').emit('Instructions', {atk:'Create a loop', defend:'Create a counter loop'});
+})
 
 setInterval(() => {
     var pack = []
